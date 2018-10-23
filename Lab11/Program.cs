@@ -25,35 +25,29 @@ namespace Lab11
         static void print(List<Movie> movies, string shower)
         {
             Console.WriteLine($"~DISPLAYING {shower.ToUpper()}~");          //Display sorter
-            Console.WriteLine("=".PadLeft(shower.Length+13,'='));           //
-            foreach (var v in movies)                                       //print all movies that apply to sorter
+            Console.WriteLine("=".PadLeft(shower.Length+13,'='));           //print all movies that apply to sorter
+            foreach (var v in movies)                                       //
                 Console.WriteLine($"{v.Title,-25}");                        //
             Console.WriteLine();                                            //
         }
 
         static void printHelper(List<Movie> movies, List<string> show)
         {
-            List<Movie> tempMovie = new List<Movie>();              //Hold movies based on category temporaraly to pass into 'print()'
-            Console.WriteLine("Chooose your weapon: ");       //      
-            for(int i = 0; i < show.Count; i++)               //Display possible categories
+            Console.WriteLine("Chooose your weapon: ");       //Display possible categories      
+            for (int i = 0; i < show.Count; i++)              //
                 Console.WriteLine($"{i+1}) {show[i]}");       //
             Console.WriteLine("6) Exit");                     //
-            if (!int.TryParse(Console.ReadLine(), out int choice) || (choice > 6 || choice < 1))//
-            {                                                                                   //user validation
+            if (!int.TryParse(Console.ReadLine(), out int choice) || (choice > 6 || choice < 1))//user validation
+            {                                                                                   //
                 Console.WriteLine("BAD");                                                       //
                 printHelper(movies, show);                                                      //
             }
-            if (choice >= 6 || choice < 1)               //Exit
-                return;                                  //    
-            else if (choice == 5)             //                                                  
-            {                                 //Display everything                                                
-                print(movies, show[4]);       //
-            }                                 //
-            else if (choice <= 6 && choice >= 1)                                            //
-            {                                                                               //
-                tempMovie = movies.Where(a => a.Category == show[choice - 1]).ToList();     //display special
-                print(tempMovie, show[choice - 1]);                                         //category
-            }                                                                               //
+            if (choice >= 6 || choice < 1)                   //Exit
+                return;                                      //    
+            else if (choice == 5)             //Display all                                                                                                                         
+                print(movies, show[4]);       //categories 
+            else if (choice <= 6 && choice >= 1)                                                     //***display special category by lambda filtering***
+                print(movies.Where(a => a.Category == show[choice - 1]).ToList(), show[choice - 1]); //***into 'movies' based on'choice', then send through 'print()'***
             printHelper(movies, show);          //recursion
         }
 
