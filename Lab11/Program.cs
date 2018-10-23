@@ -42,8 +42,8 @@ namespace Lab11
                 Console.WriteLine("BAD");                                                       //
                 printHelper(movies, show);                                                      //
             }
-            if (choice >= 6 || choice < 1)                   //Exit (not 'else if' on on purpose, has condition as well in order
-                return;                                      //to catch bad inputs and not crash
+            if (choice >= 6 || choice < 1)                   //Exit (not 'else if' on purpose, has condition as
+                return;                                      //well in order to catch bad inputs and not crash)
             else if (choice == 5)             //Display all                                                                                                                         
                 print(movies, show[4]);       //categories 
             else if (choice <= 6 && choice >= 1)                                                     //***display special category by lambda filtering***
