@@ -24,37 +24,37 @@ namespace Lab11
         }
         static void print(List<Movie> movies, string shower)
         {
-            Console.WriteLine($"~DISPLAYING {shower.ToUpper()}~");
-            Console.WriteLine("=".PadLeft(shower.Length+13,'='));
-            foreach (var v in movies)
-                Console.WriteLine($"{v.Title,-25}");//|{v.getCata(),-9}|");
-            Console.WriteLine();
+            Console.WriteLine($"~DISPLAYING {shower.ToUpper()}~");          //Display sorter
+            Console.WriteLine("=".PadLeft(shower.Length+13,'='));           //
+            foreach (var v in movies)                                       //print all movies that apply to sorter
+                Console.WriteLine($"{v.Title,-25}");                        //
+            Console.WriteLine();                                            //
         }
 
         static void printHelper(List<Movie> movies, List<string> show)
         {
-            List<Movie> tempMovie = new List<Movie>();
-            Console.WriteLine("Chooose your weapon: ");
-            for(int i = 0; i < show.Count; i++)
-                Console.WriteLine($"{i+1}) {show[i]}");
-            Console.WriteLine("6) Exit");
-            if (!int.TryParse(Console.ReadLine(), out int choice) || (choice > 6 || choice < 1))
-            {
-                Console.WriteLine("BAD");
-                printHelper(movies, show);
+            List<Movie> tempMovie = new List<Movie>();              //Hold movies based on category temporaraly to pass into 'print()'
+            Console.WriteLine("Chooose your weapon: ");       //      
+            for(int i = 0; i < show.Count; i++)               //Display possible categories
+                Console.WriteLine($"{i+1}) {show[i]}");       //
+            Console.WriteLine("6) Exit");                     //
+            if (!int.TryParse(Console.ReadLine(), out int choice) || (choice > 6 || choice < 1))//
+            {                                                                                   //user validation
+                Console.WriteLine("BAD");                                                       //
+                printHelper(movies, show);                                                      //
             }
-            if (choice >= 6 || choice < 1)
-                return;
-            else if (choice == 5)
-            {
-                print(movies, show[4]);
-            }
-            else if (choice <= 6 && choice >= 1)
-            {
-                tempMovie = movies.Where(a => a.Category == show[choice - 1]).ToList();
-                print(tempMovie, show[choice - 1]);
-            }
-            printHelper(movies, show);
+            if (choice >= 6 || choice < 1)               //Exit
+                return;                                  //    
+            else if (choice == 5)             //                                                  
+            {                                 //Display everything                                                
+                print(movies, show[4]);       //
+            }                                 //
+            else if (choice <= 6 && choice >= 1)                                            //
+            {                                                                               //
+                tempMovie = movies.Where(a => a.Category == show[choice - 1]).ToList();     //display special
+                print(tempMovie, show[choice - 1]);                                         //category
+            }                                                                               //
+            printHelper(movies, show);          //recursion
         }
 
         static void Main(string[] args)
