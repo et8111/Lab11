@@ -8,8 +8,8 @@ namespace Lab11
 {
     class Movie
     {
-        public string Title {  get;private  set; }
-        public string Category { get;private set; }
+        public string Title {  get;private  set; }  //access is permitted, changeing is not
+        public string Category { get;private set; } //access is permitted, changeing is not 
 
         public Movie(string title, string category)
         {
